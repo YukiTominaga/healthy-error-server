@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: healthy-error-server
-  annotations:
-    traffic.spinnaker.io/load-balancers: '["service healthy-error-server"]'
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: web
+      version: VERSION
   template:
     metadata:
       name: healthy-error-server
       labels:
         app: web
+        version: VERSION
     spec:
       containers:
         - name: healthy-error-server
@@ -23,15 +23,3 @@ spec:
           env:
             - name: PORT
               value: "80"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: healthy-error-server
-spec:
-  type: LoadBalancer
-  selector:
-    frontedBy: healthy-error-server
-  ports:
-    - port: 80
-      targetPort: 80

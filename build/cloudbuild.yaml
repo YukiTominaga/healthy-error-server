@@ -8,12 +8,18 @@ steps:
     args: ["push", "gcr.io/$PROJECT_ID/healthy-error-server:$TAG_NAME"]
   - id: "Sed image name"
     name: "alpine"
-    dir: "kubernetes"
     entrypoint: "ash"
     args:
       - "-c"
       - |
-        sed -i -e 's/IMAGE/gcr.io\/$PROJECT_ID\/healthy-error-server:$TAG_NAME/g' healthy-error-server.yaml
+        sed -i -e 's/IMAGE/gcr.io\/$PROJECT_ID\/healthy-error-server:$TAG_NAME/g' kubernetes/*.yaml
+  - id: "Sed image name"
+    name: "alpine"
+    entrypoint: "ash"
+    args:
+      - "-c"
+      - |
+        sed -i -e 's/VERSION/$TAG_NAME/g' kubernetes/*.yaml
   - id: "Copy to Cloud Storage"
     name: "gcr.io/cloud-builders/gsutil"
-    args: ["cp", "kubernetes/healthy-error-server.yaml", "gs://ca-tominaga-test-spinnaker/kubernetes/healthy-error-server.yaml"]
+    args: ["cp", "kubernetes/*.yaml", "gs://ca-tominaga-test-spinnaker/kubernetes/"]
