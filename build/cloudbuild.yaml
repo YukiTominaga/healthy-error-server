@@ -13,7 +13,7 @@ steps:
       - "-c"
       - |
         sed -i -e 's/IMAGE/gcr.io\/$PROJECT_ID\/healthy-error-server:$TAG_NAME/g' kubernetes/*.yaml
-  - id: "Sed image name"
+  - id: "Sed version"
     name: "alpine"
     entrypoint: "ash"
     args:
