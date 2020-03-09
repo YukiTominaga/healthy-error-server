@@ -1,9 +1,4 @@
 steps:
-  - id: "Inspect workspace"
-    name: alpine
-    entrypoint: ls
-    args:
-      - "-l"
   - id: "Build Docker Image"
     name: "gcr.io/cloud-builders/docker"
     dir: "src"
@@ -19,10 +14,6 @@ steps:
       - "-c"
       - |
         sed -i -e 's/IMAGE/gcr.io\/$PROJECT_ID\/healthy-error-server:$TAG_NAME/g' healthy-error-server.yaml
-  - id: "Deploy to Kubernetes"
-    name: "gcr.io/cloud-builders/kubectl"
-    dir: "kubernetes"
-    args: ["apply", "-f", "healthy-error-server.yaml"]
-    env:
-      - "CLOUDSDK_COMPUTE_ZONE=asia-northeast1"
-      - "CLOUDSDK_CONTAINER_CLUSTER=training-demo"
+  - id: "Copy to Cloud Storage"
+    name: "gcr.io/cloud-builders/gsutil"
+    args: ["cp", "kubernetes/healthy-error-server.yaml", "gs://ca-tominaga-test-spinnaker/kubernetes/healthy-error-server.yaml"]
