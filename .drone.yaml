@@ -3,6 +3,11 @@ type: docker
 name: develop
 
 steps:
+  - name: ls
+    image: alpine
+    commands:
+      - ls
+
   - name: docker
     image: plugins/docker
     settings:
