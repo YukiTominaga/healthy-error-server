@@ -6,7 +6,7 @@ steps:
   - name: build-and-push
     image: plugins/gcr
     settings:
-      repo: is-erozea-tominayu/healthy-error-server
+      repo: is-eorzea-tominayu/healthy-error-server
       tags: latest
       dockerfile: src/Dockerfile
       context: src/
