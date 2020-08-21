@@ -12,7 +12,7 @@ steps:
     image: plugins/docker
     settings:
       repo: gcr.is/is-eorzea-tominayu/healthy-error-server
-      auto_tag: true
+      tags: latest
       dockerfile: src/Dockerfile
       context: src/
 
