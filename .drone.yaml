@@ -14,7 +14,7 @@ steps:
       repo: is-erozea-tominayu/healthy-error-server
       tags: latest
       json_key:
-        fron_secret: google_credentials
+        from_secret: google_credentials
 
 trigger:
   branch:
