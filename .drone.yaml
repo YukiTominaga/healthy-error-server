@@ -3,7 +3,7 @@ type: docker
 name: develop
 
 steps:
-  - name: build-docker-image
+  - name: docker
     image: plugins/docker
     settings:
       repo: gcr.is/is-eorzea-tominayu/healthy-error-server
