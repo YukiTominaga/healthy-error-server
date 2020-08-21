@@ -3,24 +3,13 @@ type: docker
 name: develop
 
 steps:
-  - name: ls
-    image: alpine
-    commands:
-      - ls
-
-  - name: docker
-    image: plugins/docker
-    settings:
-      repo: gcr.is/is-eorzea-tominayu/healthy-error-server
-      tags: latest
-      dockerfile: src/Dockerfile
-      context: src/
-
-  - name: publish
+  - name: build-and-push
     image: plugins/gcr
     settings:
       repo: is-erozea-tominayu/healthy-error-server
       tags: latest
+      dockerfile: src/Dockerfile
+      context: src/
       json_key:
         from_secret: google_credentials
 
