@@ -3,18 +3,15 @@ type: docker
 name: develop
 
 steps:
-  - name: build-docker-image
-    image: gcr.io/cloud-builders/docker
-    commands:
-      - docker build -t gcr.io/is-eorzea-tominayu/healthy-error-server:latest
-
-  - name: publish
+  - name: build-and-push
     image: plugins/gcr
     settings:
-      repo: is-erozea-tominayu/healthy-error-server
+      repo: is-eorzea-tominayu/healthy-error-server
       tags: latest
+      dockerfile: src/Dockerfile
+      context: src/
       json_key:
-        fron_secret: google_credentials
+        from_secret: google_credentials
 
 trigger:
   branch:
