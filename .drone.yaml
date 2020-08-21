@@ -4,9 +4,12 @@ name: develop
 
 steps:
   - name: build-docker-image
-    image: gcr.io/cloud-builders/docker
-    commands:
-      - docker build -t gcr.io/is-eorzea-tominayu/healthy-error-server:latest src/ -f src/Dockerfile
+    image: plugins/docker
+    settings:
+      repo: gcr.is/is-eorzea-tominayu/healthy-error-server
+      auto_tag: true
+      dockerfile: src/Dockerfile
+      context: src/
 
   - name: publish
     image: plugins/gcr
